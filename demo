@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Transition</title>
+<style>
+    body{
+        width: 100%;
+        overflow-x: hidden;
+    }
+    .container {
+        display: flex;
+        width: calc(80% - 8rem);
+    }
+
+    .image-container {
+        width: 25%; 
+        height: 200px; 
+        overflow: hidden;
+        position: relative; 
+        margin: 10px; 
+       padding: 30px;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: auto;
+        position: absolute; 
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 2s ease-in-out;
+    }
+
+    .image-container img.active {
+        opacity: 1;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="image-container">
+        <img src="https://m.media-amazon.com/images/I/51naeYkPGHL._SL1500_.jpg" alt="First Image" class="active">
+        <img src="https://images-static.nykaa.com/media/catalog/product/7/a/7aa0080BELAB00000031-A.jpg" alt="Second Image">
+    </div>
+    <div class="image-container">
+        <img src="https://media6.ppl-media.com/tr:h-750,w-750,c-at_max,dpr-2/static/img/product/297932/bella-vita-organic-honey-oud-perfume_1_display_1655703231_3e276c9a.jpg" alt="First Image" class="active">
+        <img src="https://images-static.nykaa.com/media/catalog/product/7/a/7aa0080BELAB00000031-A.jpg" alt="Second Image">
+    </div>
+    <div class="image-container">
+        <img src="https://m.media-amazon.com/images/I/51naeYkPGHL._SL1500_.jpg" alt="First Image" class="active">
+        <img src="https://images-static.nykaa.com/media/catalog/product/7/a/7aa0080BELAB00000031-A.jpg" alt="Second Image">
+    </div>
+    <div class="image-container">
+        <img src="https://media6.ppl-media.com/tr:h-750,w-750,c-at_max,dpr-2/static/img/product/297932/bella-vita-organic-honey-oud-perfume_1_display_1655703231_3e276c9a.jpg" alt="First Image" class="active">
+        <img src="https://m.media-amazon.com/images/I/51naeYkPGHL._SL1500_.jpg" alt="Second Image">
+    </div>
+</div>
+
+<script>
+    // JavaScript to toggle active class for image transition
+    const containers = document.querySelectorAll('.image-container');
+
+    function transitionImages() {
+        containers.forEach(container => {
+            const images = container.querySelectorAll('img');
+            const activeImage = container.querySelector('.active');
+
+            activeImage.classList.remove('active');
+
+            const nextIndex = (Array.from(images).indexOf(activeImage) + 1) % images.length;
+            const nextImage = images[nextIndex];
+
+            nextImage.classList.add('active');
+        });
+    }
+
+    setInterval(transitionImages, 3000); // Change images every 3 seconds
+</script>
+
+</body>
+</html>
